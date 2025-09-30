@@ -8,6 +8,7 @@ let actualWidth = -1;
 let actualHeight = -1;
 
 // Player
+let paused = false;
 let playerX = 0;
 let playerY = 0;
 let playerVel = 0;
@@ -91,17 +92,32 @@ document.addEventListener("mouseup", e => { touch = false; SetTouchPos(e); }, fa
 document.addEventListener("touchstart", e => { touch = true; SetTouchPos(e); e.preventDefault(); }, false );
 document.addEventListener("touchend", e => { touch = false; SetTouchPos(e); e.preventDefault(); }, false );
 document.addEventListener("touchcancel", e => { touch = false; SetTouchPos(e); e.preventDefault(); }, false );
-document.addEventListener("keydown", e =>
-{
-    if (e.altKey && e.code === "32")
-    {
+document.addEventListener("keydown", e => {
+    if (e.altKey && e.code === "32") {
         localStorage.setItem("ohflip.maxHeightFt", 0);
         localStorage.setItem("ohflip.maxTotalFlips", 0);
         localStorage.setItem("ohflip.goalIdx", 0);
         goalIdx = 0;
     }
+    if (e.code === "Space") {
+        if (!touch) {
+            touch = true;
+            touchX = canvas.width / 2;
+            touchY = canvas.height - 10;
+        }
+        e.preventDefault();
+    }
+    if (e.code === "Escape") {
+        paused = !paused;
+        e.preventDefault();
+    }
 });
-
+document.addEventListener("keyup", e => {
+    if (e.code === "Space") {
+        touch = false;
+        e.preventDefault();
+    }
+});
 function SetTouchPos(event)
 {
     touchX = event.pageX - canvas.offsetLeft;
@@ -138,6 +154,11 @@ function Reset()
 
 function GameLoop(curTime)
 {
+    if (paused) {
+    DrawUI(); 
+    window.requestAnimationFrame(GameLoop);
+    return;
+    }
     let dt = Math.min((curTime - (lastFrameTime || curTime)) / 1000.0, 0.2);  // Cap to 200ms (5fps)
     lastFrameTime = curTime;
 
@@ -602,6 +623,9 @@ function DrawUI()
     });
 
     ctx.restore();
+    if (paused) {
+    DrawText("Paused", canvas.width / 2, canvas.height / 2, 0, 80, "center", "#FF9600");
+    DrawText("Press Escape to resume", canvas.width / 2, canvas.height / 2 + 60, 0, 24, "center", "#000");}
 }
 
 function AddPopup(x, y, text, color, smallSize)
