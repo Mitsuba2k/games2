@@ -624,8 +624,29 @@ function DrawUI()
 
     ctx.restore();
     if (paused) {
-    DrawText("Paused", canvas.width / 2, canvas.height / 2, 0, 80, "center", "#FF9600");
-    DrawText("Press Escape to resume", canvas.width / 2, canvas.height / 2 + 60, 0, 24, "center", "#000");}
+        // Get current and high scores
+        let heightFt = Math.floor(playerY / 40.0);
+        let maxHeightFt = localStorage.getItem("ohflip.maxHeightFt") || 0;
+        let maxTotalFlips = localStorage.getItem("ohflip.maxTotalFlips") || 0;
+        
+        // Draw "Paused" with black outline
+        DrawText("Paused", canvas.width / 2, canvas.height / 2, 0, 80, "center", "#000");
+        DrawText("Paused", canvas.width / 2 - 4, canvas.height / 2 - 4, 0, 80, "center", "#FF9600");
+        
+        // Draw "Press Escape to resume" with black outline
+        DrawText("Press Escape to resume", canvas.width / 2, canvas.height / 2 + 60, 0, 24, "center", "#000");
+        DrawText("Press Escape to resume", canvas.width / 2 - 2, canvas.height / 2 + 58, 0, 24, "center", "#FFF");
+        
+        // Draw current scores with black outline
+        let currentScoreText = `Height: ${heightFt} ft | Flips: ${totalFlips}`;
+        DrawText(currentScoreText, canvas.width / 2, canvas.height / 2 + 100, 0, 20, "center", "#000");
+        DrawText(currentScoreText, canvas.width / 2 - 2, canvas.height / 2 + 98, 0, 20, "center", "#FFF");
+        
+        // Draw high scores with black outline
+        let highScoreText = `Best Height: ${maxHeightFt} ft | Best Flips: ${maxTotalFlips}`;
+        DrawText(highScoreText, canvas.width / 2, canvas.height / 2 + 130, 0, 20, "center", "#000");
+        DrawText(highScoreText, canvas.width / 2 - 2, canvas.height / 2 + 128, 0, 20, "center", "#AAA");
+    }
 }
 
 function AddPopup(x, y, text, color, smallSize)
