@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mango Mango Mango</title>
-  </head>
-  <body>
-    <main>
-<p1>mango?</p1>
-<a href="crazy-cattle-3d"> Crazy Cattle 3D </a>
-<a href="crazy-chicken-3d"> Crazy Cattle 3D </a>
-<a href="crazy-cat-3d"> Crazy Cattle 3D </a>
-    </main>
-  </body>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta http-equiv="pragma" content="no-cache"/>
+    <title>Created with GameMaker</title>
+    <style>
+        body, html {
+            background: #000;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            image-rendering: optimizeSpeed;
+            -webkit-interpolation-mode: nearest-neighbor;
+            -ms-touch-action: none;
+            touch-action: none;
+        }
+    </style>
+
+</head>
+<body>
+
+    
+    <div class="gm4html5_div_class" id="gm4html5_div_id">
+        <canvas id="canvas"><p>Your browser doesn't support HTML5 canvas.</p></canvas>
+    </div>
+
+    <div id="myCustomLoader" style="position:fixed;inset:0;z-index:99999;">
+    <video src="asgore.mp4" autoplay loop muted style="width:100vw;height:100vh;object-fit:cover;" id="loaderVideo"></video>
+    </div>
+    <script src="customLoader.js"></script>
+    <script type="text/javascript" src="html5game/NXTALE.js?cachebust=938571485"></script>
+    <script src="rezizeCanvasToPreset.js"></script>
+    <script src="firestore_save_listener.js"></script>
+</body>
 </html>
